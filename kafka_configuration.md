@@ -1,6 +1,7 @@
 ## Download and install Kafka
 
-1. The information bellow is a compiled resource extracted from official ![Apache Kafka site](https://kafka.apache.org/quickstart)
+1. The information bellow is a compiled resource extracted from official ![Apache Kafka site](https://kafka.apache.org/quickstart) 
+
 ![Download the 2.3.0 release and un-tar it](https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz)
 
 > **tar** -xzf kafka_2.12-2.3.0.tgz
