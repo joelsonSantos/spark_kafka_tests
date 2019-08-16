@@ -9,6 +9,14 @@ object Job1 {
   def main(args: Array[String]) : Unit = {
     
     // import sqlContext.implicits._
+    
+    /*// argumentos
+      if (args.length != 7) {
+        println("Incorrect number of parameters.")
+        println("Usage: spark-submit --class 'Job1' Job1.jar")
+      }
+    */
+    
 
     val kafkaParams = Map[String, Object](
       "bootstrap.servers" -> "localhost:9092",
