@@ -7,6 +7,8 @@ import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 
 object Job1 {
   def main(args: Array[String]) : Unit = {
+    
+    // import sqlContext.implicits._
 
     val kafkaParams = Map[String, Object](
       "bootstrap.servers" -> "localhost:9092",
@@ -17,7 +19,14 @@ object Job1 {
       "enable.auto.commit" -> (false: java.lang.Boolean)
     )
     val conf = new SparkConf().setMaster("local[2]").setAppName("Job1")
-
+    
+  /*  val sc = new SparkContext(conf) 
+    sc.hadoopConfiguration.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem") 
+    sc.hadoopConfiguration.set("fs.s3n.awsAccessKeyId", "xxxxxxxxx") 
+    sc.hadoopConfiguration.set("fs.s3n.awsSecretAccessKey", "xxxxxxxxx") 
+    val streamingContext = new StreamingContext(sc, Durations.Seconds(30)) 
+    val sqlContext = new SQLContext(sc) */
+    
     //Read messages in batch of 30 seconds
     val streamingContext = new StreamingContext(conf, Durations.seconds(30))
 
@@ -28,6 +37,14 @@ object Job1 {
       PreferConsistent,
       Subscribe[String, String](topics, kafkaParams)
     ).map(x => (x.key, x.value))
+    // usar a instrução abaixo
+    // .map(x => x.value)
+   
+    /* stream.foreachRDD {rdd =>
+      val df = rdd.toDF()
+      df.write.format("json").saveAsTextFile("s3://iiiii/ttttt.json")
+    } */
+    
     // salvar na S3
     stream.map(x => x._2).saveAsTextFiles("/to/path/")
     streamingContext.start()
