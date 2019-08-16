@@ -29,7 +29,7 @@ object Job1 {
       Subscribe[String, String](topics, kafkaParams)
     ).map(x => (x.key, x.value))
     // salvar na S3
-    stream.map(x => x._2).saveAsTextFiles("/home/joelson/")
+    stream.map(x => x._2).saveAsTextFiles("/to/path/")
     streamingContext.start()
     streamingContext.awaitTermination()
   }
